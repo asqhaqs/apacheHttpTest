@@ -1,7 +1,6 @@
 package com.quartzTest;
 
 import com.quartzTest.job.HellowJob;
-import com.sun.deploy.uitoolkit.impl.fx.HostServicesFactory;
 import org.quartz.*;
 
 import static org.quartz.JobBuilder.*;
@@ -10,6 +9,7 @@ import static org.quartz.SimpleScheduleBuilder.*;
 
 
 /**
+ * scheduler class
  * Created by xudong on 2018/8/17.
  */
 public class SchedulerLesson1 {
@@ -20,7 +20,10 @@ public class SchedulerLesson1 {
 
         //define a job and tie it
         JobDetail job = newJob(HellowJob.class)
-                .withIdentity("myJob","group1").build();
+                .withIdentity("myJob","group1")
+                .usingJobData("jobSays","Hello World")
+                .usingJobData("myFloatValue",3.141f)
+                .build();
 
         //Trigger the job to run now, and then every
         // 40 seconds
